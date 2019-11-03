@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Library App</string>
+    <string name="book_price">Book Price</string>
+    <string name="book_name">Book Name</string>
+    <string name="warning_book_price">Please enter the book price</string>
+    <string name="warning_book_name">Please enter the book name</string>
+    <string name="submit">SUBMIT</string>
+    <string name="add_new_book">Add New Book</string>
+    <string name="update_book">Update Book</string>
+</resources>
