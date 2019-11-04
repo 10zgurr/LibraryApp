@@ -8,19 +8,19 @@ You can learn from this project how to create Room Database and make queries wit
 
 You can also take a look at DiffUtil feature which for updating your adapters' data in a more efficient way.
 
-The list of Android Jetpack components that I have used:
-
-- Room
-- Data Binding
-- ViewModel
-- LiveData
-- Lifecycles
 
 The list of features that my project has:
-
 - Android Data Binding
 - Room Persistence Library
 - MVVM Architecture
 - Kotlin
 - Kotlin Coroutines
 - DiffUtil
+
+
+The list of Android Jetpack components that I have used:
+- Room
+- Data Binding
+- ViewModel
+- LiveData
+- Lifecycles
