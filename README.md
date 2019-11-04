@@ -12,4 +12,4 @@ The list of features that I have used in my project:
 - Kotlin Coroutines
 - MVVM Architecture
 - Room Persistence Library
-- DiffUtil Callback
+- DiffUtil
