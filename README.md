@@ -4,7 +4,7 @@ I have created a sample Android library application that has a local database yo
 
 The project built on MVVM architecture with Android Databinding. Also, it has Android Jetpack components and Kotlin language features.
 
-You can learn from this project how to create Room Database and make queries with it. Also, understanding MVVM architecture and Kotlin language. Plus, the usage of Android Data binding in the .xml layout files.
+You can learn from this project how to create Room Database and make queries with it. Also, understanding MVVM architecture and Kotlin language. Plus, the usage of Android Data Binding with implementation .xml layout files.
 
 You can also take a look at DiffUtil feature which for updating your adapters' data in a more efficient way.
 
