@@ -8,10 +8,14 @@ You can learn from this project how to create Room Database and make queries wit
 
 You can also take a look at DiffUtil feature which for updating your adapters' data in a more efficient way.
 
+New Update : I've added the Dagger 2 Dependency Injection mechanism to my project to make the app more efficient and more stable. With this library, it makes a big difference in the big scale Android projects about the app's performance, stability, and reliability.
+About the Dagger 2 Dependency Injection : https://github.com/google/dagger
+
 
 The list of features that my project has:
 - Android Data Binding
 - Room Persistence Library
+- Dagger 2 Dependency Injection
 - MVVM Architecture
 - Kotlin
 - Kotlin Coroutines
