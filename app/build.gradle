@@ -30,6 +30,7 @@ android {
 
 dependencies {
     def room_version = "2.2.1"
+    def dagger_version = "2.25.2"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -50,6 +51,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
     kapt "androidx.lifecycle:lifecycle-compiler:2.1.0"
+    // dagger 2
+    api "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

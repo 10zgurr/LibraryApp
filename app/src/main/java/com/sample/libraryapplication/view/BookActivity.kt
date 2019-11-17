@@ -2,15 +2,16 @@ package com.sample.libraryapplication.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.sample.libraryapplication.LibraryApplication
 import com.sample.libraryapplication.R
+import com.sample.libraryapplication.dagger.builders.BookViewModelFactory
 import com.sample.libraryapplication.database.entity.BookEntity
 import com.sample.libraryapplication.databinding.ActivityBookBinding
 import com.sample.libraryapplication.viewmodel.BookViewModel
 import kotlinx.android.synthetic.main.activity_book.*
+import javax.inject.Inject
 
 class BookActivity : AppCompatActivity() {
 
@@ -23,9 +24,14 @@ class BookActivity : AppCompatActivity() {
     private var selectedBook: BookEntity? = null
     private var selectedCategoryId: Long? = null
 
+    @Inject
+    lateinit var bookViewModelFactory: BookViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
+
+        injectDagger()
 
         getIntentExtras()
 
@@ -36,6 +42,10 @@ class BookActivity : AppCompatActivity() {
         observeViewModel()
     }
 
+    private fun injectDagger() {
+        LibraryApplication.instance.libraryComponent.inject(this)
+    }
+
     private fun getIntentExtras() {
         if(intent?.extras != null && intent?.extras!!.containsKey("is_update_book"))
             isUpdateBook = intent.getBooleanExtra("is_update_book", false)
@@ -44,7 +54,7 @@ class BookActivity : AppCompatActivity() {
     }
 
     private fun createViewModel() {
-        bookViewModel = ViewModelProviders.of(this)[BookViewModel::class.java]
+        bookViewModel = ViewModelProviders.of(this, bookViewModelFactory)[BookViewModel::class.java]
         bookViewModel.selectedCategoryId = selectedCategoryId
         bookViewModel.selectedBook = selectedBook
         bookViewModel.isUpdateBook = isUpdateBook

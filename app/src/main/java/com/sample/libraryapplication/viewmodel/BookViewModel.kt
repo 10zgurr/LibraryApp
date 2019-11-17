@@ -1,14 +1,12 @@
 package com.sample.libraryapplication.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.sample.libraryapplication.database.entity.BookEntity
 import com.sample.libraryapplication.repository.BookRepository
 
-class BookViewModel(application: Application) : AndroidViewModel(application) {
+class BookViewModel(private var bookRepository: BookRepository) : ViewModel() {
 
-    private var bookRepository = BookRepository()
     val isBookNameEmpty = MutableLiveData<Boolean>()
     val isBookPriceEmpty = MutableLiveData<Boolean>()
     val shouldFinishActivity = MutableLiveData<Boolean>()

@@ -13,12 +13,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sample.libraryapplication.LibraryApplication
 import com.sample.libraryapplication.R
+import com.sample.libraryapplication.dagger.builders.BookListViewModelFactory
 import com.sample.libraryapplication.database.entity.BookEntity
 import com.sample.libraryapplication.database.entity.CategoryEntity
 import com.sample.libraryapplication.databinding.ActivityBookListBinding
 import com.sample.libraryapplication.viewmodel.BookListViewModel
 import kotlinx.android.synthetic.main.activity_book_list.*
+import javax.inject.Inject
 
 class BookListActivity : AppCompatActivity() {
 
@@ -33,15 +36,28 @@ class BookListActivity : AppCompatActivity() {
     private var booksAdapter: BooksAdapter? = null
     private var selectedCategory: CategoryEntity? = null
 
+    @Inject
+    lateinit var bookListViewModelFactory: BookListViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bookListViewModel = ViewModelProviders.of(this)[BookListViewModel::class.java]
-        bookListClickHandlers = BookListClickHandlers()
+        injectDagger()
+
+        createViewModel()
 
         setBinding()
 
         observeViewModel(bookListViewModel)
+    }
+
+    private fun createViewModel() {
+        bookListViewModel = ViewModelProviders.of(this, bookListViewModelFactory)[BookListViewModel::class.java]
+        bookListClickHandlers = BookListClickHandlers()
+    }
+
+    private fun injectDagger() {
+        LibraryApplication.instance.libraryComponent.inject(this)
     }
 
     private fun observeViewModel(bookListViewModel: BookListViewModel) {

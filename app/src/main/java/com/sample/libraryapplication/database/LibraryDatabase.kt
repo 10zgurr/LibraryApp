@@ -1,10 +1,10 @@
 package com.sample.libraryapplication.database
 
+import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.sample.libraryapplication.LibraryApplication
 import com.sample.libraryapplication.database.dao.BookDAO
 import com.sample.libraryapplication.database.dao.CategoryDAO
 import com.sample.libraryapplication.database.entity.BookEntity
@@ -48,12 +48,12 @@ abstract class LibraryDatabase : RoomDatabase() {
             val book7 = BookEntity(7, "Can I Run?", 99.99, NOVELS_CATEGORY_ID)
             val book8 = BookEntity(8, "Basic of Physics", 10.50, EDUCATIONAL_BOOKS_CATEGORY_ID)
 
-            val categoryDAO = getInstance().getCategoryDAO()
+            val categoryDAO = getInstance(libraryApplication).getCategoryDAO()
             categoryDAO.addCategory(category1)
             categoryDAO.addCategory(category2)
             categoryDAO.addCategory(category3)
 
-            val bookDAO = getInstance().getBookDAO()
+            val bookDAO = getInstance(libraryApplication).getBookDAO()
             bookDAO.addBook(book1)
             bookDAO.addBook(book2)
             bookDAO.addBook(book3)
@@ -64,10 +64,13 @@ abstract class LibraryDatabase : RoomDatabase() {
             bookDAO.addBook(book8)
         }
 
+        private lateinit var libraryApplication: Application
+
         private var instance: LibraryDatabase? = null
-        fun getInstance(): LibraryDatabase {
+        fun getInstance(application: Application): LibraryDatabase {
+            libraryApplication = application
             return if (instance == null) synchronized(this) {
-                instance = Room.databaseBuilder(LibraryApplication.instance, LibraryDatabase::class.java, "library_database")
+                instance = Room.databaseBuilder(application, LibraryDatabase::class.java, "library_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(databaseCallback)
                     .build()

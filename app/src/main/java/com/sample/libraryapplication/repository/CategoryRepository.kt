@@ -1,5 +1,6 @@
 package com.sample.libraryapplication.repository
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import com.sample.libraryapplication.database.LibraryDatabase
 import com.sample.libraryapplication.database.dao.CategoryDAO
@@ -8,9 +9,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CategoryRepository {
+class CategoryRepository(application: Application) {
 
-    private var categoryDAO: CategoryDAO = LibraryDatabase.getInstance().getCategoryDAO()
+    private var categoryDAO: CategoryDAO = LibraryDatabase.getInstance(application).getCategoryDAO()
 
     fun getCategories(): LiveData<List<CategoryEntity>> {
         return categoryDAO.getAllCategories()
