@@ -1,4 +1,4 @@
-package com.sample.libraryapplication.dagger.builders
+package com.sample.libraryapplication.dagger.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

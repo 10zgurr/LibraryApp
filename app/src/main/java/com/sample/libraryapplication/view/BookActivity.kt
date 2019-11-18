@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sample.libraryapplication.LibraryApplication
 import com.sample.libraryapplication.R
-import com.sample.libraryapplication.dagger.builders.BookViewModelFactory
+import com.sample.libraryapplication.dagger.factory.BookViewModelFactory
 import com.sample.libraryapplication.database.entity.BookEntity
 import com.sample.libraryapplication.databinding.ActivityBookBinding
 import com.sample.libraryapplication.viewmodel.BookViewModel

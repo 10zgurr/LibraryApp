@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.libraryapplication.LibraryApplication
 import com.sample.libraryapplication.R
-import com.sample.libraryapplication.dagger.builders.BookListViewModelFactory
+import com.sample.libraryapplication.dagger.factory.BookListViewModelFactory
 import com.sample.libraryapplication.database.entity.BookEntity
 import com.sample.libraryapplication.database.entity.CategoryEntity
 import com.sample.libraryapplication.databinding.ActivityBookListBinding
@@ -48,7 +48,7 @@ class BookListActivity : AppCompatActivity() {
 
         setBinding()
 
-        observeViewModel(bookListViewModel)
+        observeViewModel()
     }
 
     private fun createViewModel() {
@@ -60,9 +60,11 @@ class BookListActivity : AppCompatActivity() {
         LibraryApplication.instance.libraryComponent.inject(this)
     }
 
-    private fun observeViewModel(bookListViewModel: BookListViewModel) {
+    private fun observeViewModel() {
+        bookListViewModel.isLoading.value = true
         bookListViewModel.allCategories.observe(this, Observer { list ->
             if (!isDestroyed) {
+                bookListViewModel.isLoading.value = false
                 list.forEach {
                     Log.d(TAG, "Category Name: ${it.categoryName} - Category Desc: ${it.categoryDesc}")
                 }
